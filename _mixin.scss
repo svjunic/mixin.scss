@@ -1,0 +1,42 @@
+// @description
+//   margin,paddingなどのクラス量産用
+//   間隔ごとに出力
+// @param 
+//   $max      : 最大数
+//   $space    : 間隔（デフォルトは５。5,10,15・・・のように出力）
+//   $prefix   : 間隔（デフォルトは５。5,10,15・・・のように出力）
+//   $property : CSSプロパティ名
+// @how to use
+//   @include spacing_style ( 50, 5, "m", "margin" );
+//   @include spacing_style ( 50, 5, "p", "padding" );
+@mixin spacing_style ( $max, $space: 5, $prefix: "m", $property: "margin" ) {
+  $num: 0;
+  $repeat_count: ($max / $space);
+
+  @for $i from 1 through $repeat_count {
+    $num: $i * $space;
+
+    .#{$prefix}t#{$num} { #{$property}-top:    #{$num}px; }
+    .#{$prefix}r#{$num} { #{$property}-right:  #{$num}px; }
+    .#{$prefix}b#{$num} { #{$property}-bottom: #{$num}px; }
+    .#{$prefix}l#{$num} { #{$property}-left:   #{$num}px; }
+  }
+}
+
+
+// @description
+//   フォントサイズ指定用のクラスを量産
+// @param 
+//   $min  : 最小文字サイズ
+//   $max  : 最大文字サイズ
+//   $base : 基準文字サイズ
+// @how to use
+//   font-size: fs(10,12,'%');
+//@include font_size( 8, 32, "fs" );
+
+@mixin font_size ( $min, $max, $base, $prefix: "fs" ) {
+  @for $i from $min through $max {
+    .#{$prefix}#{$i} { font-size: fs( $i,$base,'%'); }
+  }
+}
+

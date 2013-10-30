@@ -1,0 +1,15 @@
+// @description
+//   フォントサイズを返す
+// @param 
+//   $size    : 目指すサイズ
+//   $context : デフォルトのサイズ
+//   $unit    : 単位（デフォルトはem）
+// @how to use
+//   font-size: fs(10,12,'%');
+@function fs($size, $context, $unit:'em'){
+	@if $unit == '%' {
+		@return #{$size/$context*100}#{$unit};
+	} @else {
+		@return #{$size/$context}#{$unit};
+	}
+}
